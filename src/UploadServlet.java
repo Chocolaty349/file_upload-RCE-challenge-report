@@ -20,7 +20,6 @@ import jakarta.servlet.annotation.MultipartConfig;
 
 @WebServlet(name = "UploadServlet", urlPatterns = { "/uploadnewfile" })
 @MultipartConfig(location = "/tmp", maxFileSize = 1024 * 1024 * 50, // 50MB
-        fileSizeThreshold = 1024 * 1024 * 2, // 2MB
         maxRequestSize = 1024 * 1024 * 50 // 50MB
 )
 public class UploadServlet extends HttpServlet {
@@ -33,14 +32,21 @@ public class UploadServlet extends HttpServlet {
         Part filePart = request.getPart("file");
         String fileName = filePart.getSubmittedFileName();
 
+        filePart.write(upload_path + File.separator + fileName);
+
         if (!validate(fileName)) {
             writer.println(fileName + " not allowed");
             writer.println("only .png and .jpg are allowed");
+            File delete = new File(upload_path + File.separator + fileName);
+            if (delete.exists()) {
+                
+                delete.delete();
+                writer.println("file deleted");
+            }
             request.getRequestDispatcher("index.html").include(request, response);
-        } else {
-            filePart.write(upload_path + File.separator + fileName);
-            writer.println("The file uploaded sucessfully.");
         }
+        else
+            writer.println("The file uploaded sucessfully.");
         // for (Part part : request.getParts()) {
         // part.write("C:\\upload\\" + fileName);
         // }
@@ -48,6 +54,11 @@ public class UploadServlet extends HttpServlet {
 
     private boolean validate(String filename) {
         filename = filename.toLowerCase();
+        try {
+            wait(4); // represent some validate that took more time
+        } catch (InterruptedException Ite) {
+            Ite.printStackTrace();
+        }
         if (!filename.contains(".jpg") && !filename.contains(".png"))
             return false;
         return true;
