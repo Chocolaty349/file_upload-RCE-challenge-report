@@ -13,7 +13,7 @@ public class ResourceList extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        final String path = "/opt/tomcat/apache-tomcat-10.1.23/webapps/upload_app/data";
+        final String path = "/usr/local/tomcat/webapps/upload_app/data";
         File directory = new File(path);
         
 

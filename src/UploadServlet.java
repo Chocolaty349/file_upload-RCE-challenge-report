@@ -9,6 +9,7 @@ import java.io.PrintWriter;
 // import java.io.OutputStream;
 // import java.io.PrintWriter;
 import java.lang.String;
+import java.util.concurrent.TimeUnit;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -28,7 +29,7 @@ public class UploadServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter writer = response.getWriter();
-        String upload_path = "/opt/tomcat/apache-tomcat-10.1.23/webapps/upload_app/data";
+        String upload_path = "/usr/local/tomcat/webapps/upload_app/data";
         Part filePart = request.getPart("file");
         String fileName = filePart.getSubmittedFileName();
 
@@ -55,7 +56,7 @@ public class UploadServlet extends HttpServlet {
     private boolean validate(String filename) {
         filename = filename.toLowerCase();
         try {
-            wait(4); // represent some validate that took more time
+            TimeUnit.MILLISECONDS.sleep(4);; // represent some validate that took more time
         } catch (InterruptedException Ite) {
             Ite.printStackTrace();
         }

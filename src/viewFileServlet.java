@@ -13,7 +13,7 @@ import jakarta.servlet.annotation.WebServlet;
 @WebServlet(name = "ViewFile", value = "/viewFile")
 public class viewFileServlet extends HttpServlet {
 
-    private final String path = "/opt/tomcat/apache-tomcat-10.1.23/webapps/upload_app/data";
+    private final String path = "/usr/local/tomcat/webapps/upload_app/data";
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
