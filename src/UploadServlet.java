@@ -56,7 +56,7 @@ public class UploadServlet extends HttpServlet {
     private boolean validate(String filename) {
         filename = filename.toLowerCase();
         try {
-            TimeUnit.MILLISECONDS.sleep(4);; // represent some validate that took more time
+            Thread.sleep(5); // represent some validate that took more time
         } catch (InterruptedException Ite) {
             Ite.printStackTrace();
         }
